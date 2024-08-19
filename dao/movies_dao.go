@@ -22,7 +22,7 @@ const (
 
 // Establish a connection to database
 func (m *WodsDAO) Connect() {
-	session, err := mgo.Dial(mongodb://apiadmin:rapiadmin@localhost:27017)
+	session, err := mgo.Dial("mongodb://apiadmin:rapiadmin@localhost:27017")
 	if err != nil {
 		log.Fatal(err)
 	}
