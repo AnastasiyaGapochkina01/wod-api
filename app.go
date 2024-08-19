@@ -14,7 +14,7 @@ import (
 )
 
 var config = Config{}
-var dao = MoviesDAO{}
+var dao = WodsDAO{}
 
 // GET list of movies
 func AllMoviesEndPoint(w http.ResponseWriter, r *http.Request) {
@@ -40,28 +40,28 @@ func FindMovieEndpoint(w http.ResponseWriter, r *http.Request) {
 // POST a new movie
 func CreateMovieEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var movie Movie
-	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
+	var wod Wod
+	if err := json.NewDecoder(r.Body).Decode(&wod); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	movie.ID = bson.NewObjectId()
-	if err := dao.Insert(movie); err != nil {
+	wod.ID = bson.NewObjectId()
+	if err := dao.Insert(wod); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusCreated, movie)
+	respondWithJson(w, http.StatusCreated, wod)
 }
 
 // PUT update an existing movie
 func UpdateMovieEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var movie Movie
-	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
+	var wod Wod
+	if err := json.NewDecoder(r.Body).Decode(&wod); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	if err := dao.Update(movie); err != nil {
+	if err := dao.Update(wod); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -71,12 +71,12 @@ func UpdateMovieEndPoint(w http.ResponseWriter, r *http.Request) {
 // DELETE an existing movie
 func DeleteMovieEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var movie Movie
-	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
+	var wod Wod
+	if err := json.NewDecoder(r.Body).Decode(&wod); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	if err := dao.Delete(movie); err != nil {
+	if err := dao.Delete(wod); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
