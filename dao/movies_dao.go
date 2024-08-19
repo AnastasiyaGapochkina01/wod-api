@@ -36,7 +36,7 @@ func (m *WodsDAO) FindAll() ([]Wod, error) {
 }
 
 // Find a movie by its id
-func (m *WodsDAO) FindById(id string) (Movie, error) {
+func (m *WodsDAO) FindById(id string) (Wod, error) {
 	var wod Wod
 	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&wod)
 	return wod, err
