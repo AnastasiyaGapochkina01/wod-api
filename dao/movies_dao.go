@@ -29,8 +29,8 @@ func (m *WodsDAO) Connect() {
 }
 
 // Find list of movies
-func (m *WodsDAO) FindAll() ([]Movie, error) {
-	var wods []Movie
+func (m *WodsDAO) FindAll() ([]Wod, error) {
+	var wods []Wod
 	err := db.C(COLLECTION).Find(bson.M{}).All(&wods)
 	return wods, err
 }
@@ -38,7 +38,7 @@ func (m *WodsDAO) FindAll() ([]Movie, error) {
 // Find a movie by its id
 func (m *WodsDAO) FindById(id string) (Movie, error) {
 	var wod Wod
-	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&movie)
+	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&wod)
 	return wod, err
 }
 
